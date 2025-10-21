@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Experiência VR 360° com Cursor</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+        
+        <!-- Cena 360° -->
+        <a-sky src="canyon_trail.jpg" rotation="0 -90 0"></a-sky>   <!--Imagem-->
+        
+        <!-- Cursor -->
+        <a-camera>
+            <a-cursor 
+                id="cursor"
+                animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+                animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+                event-set__mouseenter="_event: mouseenter; color: #00FF00"
+                event-set__mouseleave="_event: mouseleave; color: #FFFFFF"
+                fuse="true"
+                fuse-timeout="1500"
+                raycaster="objects: .clickable">
+            </a-cursor>
+        </a-camera>
+
+        <!-- Objetos interativos na cena -->
+        <!--Variável box(caixa), sphere(círculo), cylinder(Cilindro) -->
+        
+        <!--Meu Primeiro Box-->
+        <!-- Limão -->
+        
+        <a-box
+            class="clickable"
+            position="-1 0.5 -3" 
+            rotation="0 45 0" 
+            width="1" 
+            height="1" 
+            depth="1" 
+            color="#aee327"
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: rotation; to: 0 405 0; dur: 2000; startEvents: click">
+        </a-box>
+    
+        <!--Meu segundo box-->    
+        <!-- vermelho vibrante -->
+
+        <a-box
+            class="clickable"
+            position="-10 -4 -3" 
+            rotation="0 45 0" 
+            width="1" 
+            height="1" 
+            depth="1" 
+            color="#ff001e" 
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: rotation; to: 0 405 0; dur: 2000; startEvents: click">
+        <a-plane 
+            position="-0 -1 -0" 
+            rotation="-90 0 0" 
+            width="4"
+            height="3.5" 
+            color="#fc032c">
+        </a-plane>
+        </a-box>    
+        
+    <!--Meu Terceiro box-->
+    <!-- Lilás vibrante -->
+    <!-- -10 para longe,  2 para cima,7 para direita -->
+     
+        <a-box
+            class="clickable"
+            position="-10 2 7" 
+            rotation="0 45 0" 
+            width="1" 
+            height="1" 
+            depth="1" 
+            color="#ee00ff"
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: rotation; to: 0 405 0; dur: 2000; startEvents: click">
+        <a-plane 
+            position="-0.1 -1 -0.1" 
+            rotation="-90 60 60"
+            width="4"
+            height="3" 
+            color="#ee00ff">
+        </a-plane>        
+        </a-box>
+
+        <!--Meu Quarto box-->
+        <!-- Azul vibrante -->    
+        <a-box
+            class="clickable"
+            position="9 20 -10"
+            rotation="0 45 0" 
+            width="1" 
+            height="1" 
+            depth="1" 
+            color="#031cfc"
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: rotation; to: 0 405 0; dur: 2000; startEvents: click">
+        <a-plane 
+            position="1 1 1" 
+            rotation="-90 60 60"
+            width="4"
+            height="3" 
+            color="#ee00ff">
+        </a-plane>  
+        </a-box>
+
+        <a-sphere 
+            class="clickable"
+            position="-50 50 +90" 
+            radius="1.25" 
+            color="#12c93d"
+            event-set__mouseenter="_event: mouseenter; scale: 1.1 1.1 1.1"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: position; to: 0 2.5 -5; dur: 500; startEvents: click; dir: alternate; loop: false">
+        </a-sphere>
+
+        <a-cylinder 
+            class="clickable"
+            position="1 0.75 -3" 
+            radius="0.4" 
+            height="1.6" 
+            color="#842cdb"
+            event-set__mouseenter="_event: mouseenter; color: #fa3005"
+            event-set__mouseleave="_event: mouseleave; color: #e5ff00"
+            animation__click="property: color; to: #FF0000; dur: 600; startEvents: click; dir: alternate; loop: true">
+        </a-cylinder>
+
+        <!-- Plano de chão 
+        <a-plane 
+            position="0 0 -4" 
+            rotation="-90 0 0" 
+            width="4" 
+            height="3.5" 
+            color="#fc032c">
+        </a-plane>-->
+        <!-- Plano de chão -->
+        <a-entity 
+            geometry="primitive: triangle; vertexA: 1 30 5; vertexB: -1.8 -1.5 0; vertexC: 1.7 -1.5 0" 
+            material="color: #fc032c; side: double"
+            position="0 0 -4"
+            rotation="-90 0 0">
+        </a-entity>
+
+        <!-- Texto informativo -->
+        <a-text 
+            value="Clique nos objetos!" 
+            position="-1.5 2 -3" 
+            color="#FFFFFF" 
+            align="center">
+        </a-text>
+
+    </a-scene>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Georgia, 'ariel', Times, serif;
+        }
+        
+        /* Estilo para quando o cursor está fundindo */
+        .a-fusion-cursor {
+            opacity: 0.8;
+        }
+    </style>
+</body>
+</html>
