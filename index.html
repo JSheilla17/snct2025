@@ -28,9 +28,8 @@
 </head>
 <body>
     <a-scene cursor="rayOrigin: mouse">
-     <!-- Cena 360° -->
         <a-sky src="Juliana (1).jpg" rotation="0 -90 0"></a-sky>
-    
+
         <!-- Câmera com cursor -->
         <a-camera>
             <a-cursor 
@@ -204,68 +203,42 @@ a Lua e as estrelas.-->
         <a-entity light="type: ambient; color: #888"></a-entity>
         <a-entity light="type: directional; color: #FFF; intensity: 0.5" position="-5 5 2"></a-entity>
 
-        <!-- Popup Container -->
         <div id="popup" class="popup"></div>
     </a-scene>
 
     <script>
-        // Elementos do DOM
         const popup = document.getElementById('popup');
-        const cursor = document.getElementById('cursor');
 
-        // Eventos para mostrar/ocultar popup
+        // Mostrar o popup ao clicar em qualquer objeto com a classe "clickable"
         document.querySelectorAll('.clickable').forEach(object => {
-            // Mouse enter - mostrar popup
             object.addEventListener('click', function(evt) {
-    const title = this.getAttribute('data-title');
-    const description = this.getAttribute('data-description');
-    const image = this.getAttribute('data-image');
-
-    popup.innerHTML = `
-        <div class="popup-title">${title}</div>
-        <div class="popup-desc">${description}</div>
-        ${image ? `<img src="${image}" style="width: 100%; margin-top: 10px;">` : ''}
-    `;
-
-    popup.style.left = (evt.clientX + 15) + 'px';
-    popup.style.top = (evt.clientY + 15) + 'px';
-    popup.style.display = 'block';
-});
-    ////////////////////////////////////imagemmmmmmm/////////
-                // Conteúdo do popup
-                // Pegar o caminho da imagem (se existir)
+                const title = this.getAttribute('data-title');
+                const description = this.getAttribute('data-description');
                 const image = this.getAttribute('data-image');
 
-// Montar o conteúdo do popup com imagem (que tem)
                 popup.innerHTML = `
-                <div class="popup-title">${title}</div>
-                <div class="popup-desc">${description}</div>
-                ${image ? `<img src="${image}" style="width: 100%; margin-top: 10px;">` : ''}
+                 <div class="popup-title">${title}</div>
+                    <div class="popup-desc">${description}</div>
+                    ${image ? `<img src="${image}" style="width: 100%; margin-top: 10px;">` : ''}
                 `;
+
+                // Posição do clique para desktop e mobile
+                popup.style.left = (evt.clientX + 15) + 'px';
+                popup.style.top = (evt.clientY + 15) + 'px';
                 popup.style.display = 'block';
-            });
-
-            // Mouse leave - ocultar popup
-            object.addEventListener('mouseleave', function() {
-                popup.style.display = 'none';
-            });
-
-            // Mover popup com o cursor
-            object.addEventListener('mousemove', function(evt) {
-                const intersection = evt.detail.intersection;
-                if (intersection) {
-                    // Converter coordenadas 3D para coordenadas de tela
-                    const point = intersection.point;
-                    popup.style.left = (point.x * 50 + 50) + '%';
-                    popup.style.top = (-point.y * 50 + 50) + '%';
-                }
             });
         });
 
-        // Sistema para atualizar posição do popup baseado no movimento do mouse
+        // Oculta o popup se clicar fora de qualquer objeto clicável
+        document.addEventListener('click', function(evt) {
+            if (!evt.target.classList.contains('clickable')) {
+                popup.style.display = 'none';
+            }
+         });
+
+        // Atualiza a posição do popup com o movimento do mouse
         document.addEventListener('mousemove', function(evt) {
             if (popup.style.display === 'block') {
-                // Posicionar popup próximo ao cursor do mouse
                 popup.style.left = (evt.clientX + 15) + 'px';
                 popup.style.top = (evt.clientY + 15) + 'px';
             }
