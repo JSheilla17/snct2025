@@ -216,13 +216,21 @@ a Lua e as estrelas.-->
         // Eventos para mostrar/ocultar popup
         document.querySelectorAll('.clickable').forEach(object => {
             // Mouse enter - mostrar popup
-            object.addEventListener('mouseenter', function(evt) {
-                const title = this.getAttribute('data-title');
-                const description = this.getAttribute('data-description');
-                
-                // Posicionar popup próximo ao cursor
-                popup.style.left = (evt.clientX + 15) + 'px';
-                popup.style.top = (evt.clientY + 15) + 'px';
+            object.addEventListener('click', function(evt) {
+    const title = this.getAttribute('data-title');
+    const description = this.getAttribute('data-description');
+    const image = this.getAttribute('data-image');
+
+    popup.innerHTML = `
+        <div class="popup-title">${title}</div>
+        <div class="popup-desc">${description}</div>
+        ${image ? `<img src="${image}" style="width: 100%; margin-top: 10px;">` : ''}
+    `;
+
+    popup.style.left = (evt.clientX + 15) + 'px';
+    popup.style.top = (evt.clientY + 15) + 'px';
+    popup.style.display = 'block';
+});
     ////////////////////////////////////imagemmmmmmm/////////
                 // Conteúdo do popup
                 // Pegar o caminho da imagem (se existir)
@@ -265,4 +273,5 @@ a Lua e as estrelas.-->
     </script>
 </body>
 </html>
+
 
