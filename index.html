@@ -221,8 +221,8 @@ a Lua e as estrelas.-->
                 const description = this.getAttribute('data-description');
                 
                 // Posicionar popup próximo ao cursor
-                popup.style.left = (evt.detail.intersection.point.x * 100 + 50) + '%';
-                popup.style.top = (evt.detail.intersection.point.y * 100 + 50) + '%';
+                popup.style.left = (evt.clientX + 15) + 'px';
+                popup.style.top = (evt.clientY + 15) + 'px';
     ////////////////////////////////////imagemmmmmmm/////////
                 // Conteúdo do popup
                 // Pegar o caminho da imagem (se existir)
@@ -265,3 +265,4 @@ a Lua e as estrelas.-->
     </script>
 </body>
 </html>
+
